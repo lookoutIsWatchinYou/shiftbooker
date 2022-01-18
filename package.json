@@ -1,0 +1,14 @@
+{
+  "name": "jsbot",
+  "version": "1.0.0",
+  "description": "frazer bot",
+  "main": "example.js",
+  
+  "author": "fraz",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^13.0.0",
+    "dotenv": "14.2.0"
+
+  }
+}
