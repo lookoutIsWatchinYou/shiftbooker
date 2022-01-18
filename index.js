@@ -1,13 +1,12 @@
 const puppeteer = require('puppeteer');
 var fs = require('fs');
-const  config = require('dotenv').config({ path: 'C:/Users/fraze/Documents/allDevShit/memeProjects/jsbot/.env' })
+const  config = require('dotenv')
+config.config(".env")
 
 envs = {
-  page: process.env.PAGE,
-  user: process.env.USERNAME,
+  user: process.env.USER,
   pass: process.env.PASSWORD
 };
-
 
 (async () => {
   const browser = await puppeteer.launch({ headless: false });
@@ -24,7 +23,7 @@ envs = {
 while (true){
   await page.goto('https://elhnteol.allocate-cloud.com/EmployeeOnlineHealth/ELHNTLIVE/Login');
  
-await page.type('#Username', "Watson28678202", {delay:50}); // make both of tthese into env variables
+await page.type('#Username', envs.user, {delay:50}); // make both of tthese into env variables
  await page.type('#Password', envs.pass , {delay:50}); 
 
 
