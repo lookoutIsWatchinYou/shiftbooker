@@ -19,7 +19,6 @@ envs = {
     height: 800,
     deviceScaleFactor: 1,
   });
-  //page.waitForTimeout(600000);
 while (true){
   await page.goto('https://elhnteol.allocate-cloud.com/EmployeeOnlineHealth/ELHNTLIVE/Login');
  
@@ -53,30 +52,32 @@ const ans = await page.evaluate(()=> {
   let elist = document.querySelectorAll("#grid > tbody > tr > td")
   
   if (length>1){
-    
+    console.log(elist)
     for (i=0;i< length;i++){
       if(elist[i].innerText== "Sun" &&  elist[i+3].innerText == "Day" &&  elist[i+4].innerText == "Patient Services RBTH |4842|"){
 
     let bookbtn =  "#grid > tbody > tr:nth-child("+ Math.round(i/13) +") > td:nth-child  (" +  (i+11)   + ") > div"
     return bookbtn
    
-      }
-      else{
-      let btn = "#btnNext";
-      return btn 
-      }
+      }/*
+      console.log(elist[i].innerText)
+      if(elist[i].innerText== "Wed" &&  elist[i+2].innerText =="16:00 - 22:00" &&  elist[i+3].innerText == "Evening" &&  elist[i+4].innerText == "Patient Services RBTH |4842|"){
+        console.log("found it " +elist)
+        let bookbtn =  "#grid > tbody > tr:nth-child("+ Math.round((i+11)/13) +") > td:nth-child(" +  13   + ") > div"
+        //document.querySelector("#grid > tbody > tr:nth-child(1) > td:nth-child(13) > div")
+        console.log(i+11);
+        return bookbtn}
+      */
      
-         /* if(elist[i].innerText== "Tue" &&  elist[i+3].innerText == "Evening" &&  elist[i+4].innerText == "Patient Services RBTH |4842|"){
-
-            let bookbtn =  "#grid > tbody > tr:nth-child("+ Math.round((i+11)/13) +") > td:nth-child(" +  13   + ") > div"
-            //document.querySelector("#grid > tbody > tr:nth-child(1) > td:nth-child(13) > div")
-            console.log(i+11);
-            return bookbtn}
-           */
+     
+           
               //could do with being their own functions for better reusablility
     }
-   
+    //if nothing found in element list return btn
+    let btn = "#btnNext";
+    return btn
 }
+
 else{
   let btn = "#btnNext";
   return btn
@@ -100,12 +101,10 @@ if(ans == "#btnNext"){//if we have no shifts on this page go to next!
   await page.waitForTimeout((Math.floor(Math.random()*1000)))
 
 
-     // The promise resolves after navigation has finished
-    await page.click(ans) // Clicking the link will indirectly cause a navigation
+
+    await page.click(ans) 
   
 
-     // The promise resolves after navigation has finished
-    // Clicking the link will indirectly cause a navigation
    
   
   
@@ -120,14 +119,14 @@ else{
   await page.waitForSelector(ans)
  await page.click(ans)
   //will book the shift be careful!
-  await page.waitForSelector("body > div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-dialog-padding.ui-draggable.ui-resizable.ui-dialog-buttons > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only.ui-state-hover")
+  await page.waitForSelector("body > div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-dialog-padding.ui-draggable.ui-resizable.ui-dialog-buttons > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button:nth-child(1)")
 
+  await page.screenshot({path: 'lastattemptToBook.png'});
 
-     // The promise resolves after navigation has finished
-    await page.click("body > div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-dialog-padding.ui-draggable.ui-resizable.ui-dialog-buttons > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only.ui-state-hover")
-     // Clicking the link will indirectly cause a navigation
- 
- 
+    await page.click("body > div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-dialog-padding.ui-draggable.ui-resizable.ui-dialog-buttons > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button:nth-child(1)")
+
+    await page.screenshot({path: "C:/Users/fraze/Documents/allDevShit/memeProjects/jsbot/screenshots/testing" + Math.floor(Math.random() *10) + ".png"})
+
    await page.waitForTimeout(2000)
 e+=1
 }
